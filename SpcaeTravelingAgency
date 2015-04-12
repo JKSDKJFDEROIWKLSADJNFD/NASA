@@ -1,0 +1,74 @@
+#!/usr/bin/python
+
+import time
+import math
+from PyQt4 import QtCore, QtGui
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName(_fromUtf8("Dialog"))
+	Dialog.setFixedSize(570, 800)
+        self.label = QtGui.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(0, -10, 571, 851))
+        self.label.setText(_fromUtf8(""))
+        self.label.setPixmap(QtGui.QPixmap(_fromUtf8("img/back.png")))
+        self.label.setObjectName(_fromUtf8("label"))
+        self.NAME = QtGui.QLineEdit(Dialog)
+        self.NAME.setGeometry(QtCore.QRect(160, 360, 218, 28))
+        self.NAME.setObjectName(_fromUtf8("NAME"))
+        self.SURNAME = QtGui.QLineEdit(Dialog)
+        self.SURNAME.setGeometry(QtCore.QRect(160, 407, 218, 28))
+        self.SURNAME.setObjectName(_fromUtf8("SURNAME"))
+        self.AGE = QtGui.QLineEdit(Dialog)
+        self.AGE.setGeometry(QtCore.QRect(160, 452, 218, 28))
+        self.AGE.setObjectName(_fromUtf8("AGE"))
+        self.ID_NUMBER = QtGui.QLineEdit(Dialog)
+        self.ID_NUMBER.setGeometry(QtCore.QRect(160, 497, 218, 28))
+        self.ID_NUMBER.setObjectName(_fromUtf8("ID_NUMBER"))
+        self.pushButton = QtGui.QPushButton(Dialog)
+        self.pushButton.setGeometry(QtCore.QRect(280, 750, 89, 27))
+        self.pushButton.setText(_fromUtf8(""))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("img/butoni1.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton.setIcon(icon)
+        self.pushButton.setIconSize(QtCore.QSize(100, 100))
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.calculate = QtGui.QLineEdit(Dialog)
+        self.calculate.setGeometry(QtCore.QRect(160, 699, 218, 28))
+        self.calculate.setObjectName(_fromUtf8("calculate"))
+
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+	
+	self.pushButton.clicked.connect(self.math)
+	
+    def retranslateUi(self, Dialog):
+        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        self.NAME.setText(QtGui.QApplication.translate("Dialog", "Name", None, QtGui.QApplication.UnicodeUTF8))
+        self.SURNAME.setText(QtGui.QApplication.translate("Dialog", "Surname", None, QtGui.QApplication.UnicodeUTF8))
+        self.AGE.setText(QtGui.QApplication.translate("Dialog", "Age", None, QtGui.QApplication.UnicodeUTF8))
+        self.ID_NUMBER.setText(QtGui.QApplication.translate("Dialog", "Personal ID", None, QtGui.QApplication.UnicodeUTF8))
+        self.calculate.setText(QtGui.QApplication.translate("Dialog", "Weight", None, QtGui.QApplication.UnicodeUTF8))
+
+    def math(self):
+	use = self.calculate.text()
+	set = int(use)	
+	cost = 60000000 / 20
+	value = 5900 * set + cost
+
+	reply = QtGui.QMessageBox.question(None,'Amount','Your travel to space will cost %d $ as one of the 20 passangers. (which would probably cost millions)'% value)
+	
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    Dialog = QtGui.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())
+
